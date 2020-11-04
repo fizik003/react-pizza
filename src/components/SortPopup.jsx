@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const SortPopup = () => {
+const SortPopup = ({ items }) => {
   const [visiblePopup, setVisiblePopup] = useState(false);
   const sortBlockRef = useRef(null);
+  const [activeItem, setActiveItem] = useState(0);
 
   const toggleVisiblePopup = () => {
     setVisiblePopup(!visiblePopup);
+  };
+
+  const onSelectItems = (index) => {
+    setActiveItem(index);
+    setVisiblePopup(false);
   };
 
   const handleOutsideClick = (e) => {
@@ -34,14 +40,20 @@ const SortPopup = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>популярности</span>
+        <span onClick={toggleVisiblePopup}>{items[activeItem]}</span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
           <ul>
-            <li className="active">популярности</li>
-            <li>цене</li>
-            <li>алфавиту</li>
+            {items.map((item, index) => (
+              <li
+                onClick={() => onSelectItems(index)}
+                className={index === activeItem ? "active" : ""}
+                key={item}
+              >
+                {item}
+              </li>
+            ))}
           </ul>
         </div>
       )}
