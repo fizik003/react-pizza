@@ -40,7 +40,7 @@ const SortPopup = ({ items }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>{items[activeItem]}</span>
+        <span onClick={toggleVisiblePopup}>{items[activeItem].name}</span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
@@ -49,9 +49,9 @@ const SortPopup = ({ items }) => {
               <li
                 onClick={() => onSelectItems(index)}
                 className={index === activeItem ? "active" : ""}
-                key={item}
+                key={item.name}
               >
-                {item}
+                {item.name}
               </li>
             ))}
           </ul>
