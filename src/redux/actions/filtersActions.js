@@ -6,7 +6,7 @@ const setSortBy = (name) => {
 };
 const setCategory = (catIndex) => {
   return {
-    type: "SET_CATEGOTR",
+    type: "SET_CATEGORY",
     payload: catIndex,
   };
 };
