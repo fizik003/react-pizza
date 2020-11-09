@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 
 import { Header } from "./components";
 import { Home, Cart } from "./pages";
-import { setPizzas } from "./redux/actions/pizzasAction";
+import { fetchPizzas } from "./redux/actions/pizzasAction";
 function App() {
   const dispatch = useDispatch();
 
@@ -13,9 +12,7 @@ function App() {
     // fetch("http://localhost:3000/db.json")
     //   .then((res) => res.json())
     //   .then((data) => setPizzas(data.pizzas));
-    axios
-      .get("http://localhost:4000/pizzas")
-      .then(({ data }) => dispatch(setPizzas(data)));
+    console.log(fetchPizzas);
   }, []);
 
   return (
