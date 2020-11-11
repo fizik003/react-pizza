@@ -1,16 +1,16 @@
+import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 
-const SortPopup = ({ items }) => {
+const SortPopup = ({ items = [], onSelectSort, sortBy }) => {
   const [visiblePopup, setVisiblePopup] = useState(false);
   const sortBlockRef = useRef(null);
-  const [activeItem, setActiveItem] = useState(0);
 
   const toggleVisiblePopup = () => {
     setVisiblePopup(!visiblePopup);
   };
 
-  const onSelectItems = (index) => {
-    setActiveItem(index);
+  const onSelectItems = (type) => {
+    onSelectSort(type);
     setVisiblePopup(false);
   };
 
@@ -40,15 +40,17 @@ const SortPopup = ({ items }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>{items[activeItem].name}</span>
+        <span onClick={toggleVisiblePopup}>
+          {items.find((item) => item.type === sortBy).name}
+        </span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
           <ul>
             {items.map((item, index) => (
               <li
-                onClick={() => onSelectItems(index)}
-                className={index === activeItem ? "active" : ""}
+                onClick={() => onSelectItems(item.type)}
+                className={item.type === sortBy ? "active" : ""}
                 key={item.name}
               >
                 {item.name}
@@ -59,6 +61,16 @@ const SortPopup = ({ items }) => {
       )}
     </div>
   );
+};
+
+SortPopup.propTypes = {
+  sortBy: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onSelectSort: PropTypes.func.isRequired,
+};
+
+SortPopup.defaultProps = {
+  items: [],
 };
 
 export default SortPopup;

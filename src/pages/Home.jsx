@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setCategory } from "../redux/actions/filtersActions";
+import { setCategory, setSortBy } from "../redux/actions/filtersActions";
 import { Categories, SortPopup, PizzaBlock, PizzaLoader } from "../components";
 import { fetchPizzas } from "../redux/actions/pizzasAction";
 
@@ -26,12 +26,15 @@ const Home = () => {
     // fetch("http://localhost:3000/db.json")
     //   .then((res) => res.json())
     //   .then((data) => setPizzas(data.pizzas));
-    dispatch(fetchPizzas());
-    console.log(isLoaded);
+    dispatch(fetchPizzas(sortBy, category));
   }, [category, sortBy]);
 
   const onSelectCategory = (index) => {
     dispatch(setCategory(index));
+  };
+
+  const onSelectSort = (type) => {
+    dispatch(setSortBy(type));
   };
 
   return (
@@ -46,8 +49,10 @@ const Home = () => {
           items={[
             { name: "популярности", type: "popular" },
             { name: "цене", type: "price" },
-            { name: "алфавит", type: "alphabet" },
+            { name: "алфавит", type: "name" },
           ]}
+          onSelectSort={onSelectSort}
+          sortBy={sortBy}
         />
       </div>
       <h2 className="content__title">Все пиццы</h2>
