@@ -1,20 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { Header } from "./components";
 import { Home, Cart } from "./pages";
-import { fetchPizzas } from "./redux/actions/pizzasAction";
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    // fetch("http://localhost:3000/db.json")
-    //   .then((res) => res.json())
-    //   .then((data) => setPizzas(data.pizzas));
-    console.log(fetchPizzas);
-  }, []);
-
   return (
     <div className="wrapper">
       <Header />

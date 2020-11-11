@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 
-const Categories = ({ items, onClickItems }) => {
-  const [activeItem, setActiveItem] = useState(null);
-
-  const onSelectItem = (index) => {
-    setActiveItem(index);
-    onClickItems(index);
-  };
-
+const Categories = ({ activeItem, items, onClickItem }) => {
   return (
     <div className="categories">
       <ul>
         <li
           className={activeItem === null ? "active" : ""}
-          onClick={() => onSelectItem(null)}
+          onClick={() => onClickItem(null)}
         >
           Все
         </li>
@@ -22,7 +15,7 @@ const Categories = ({ items, onClickItems }) => {
             return (
               <li
                 className={activeItem === index ? "active" : ""}
-                onClick={() => onSelectItem(index)}
+                onClick={() => onClickItem(index)}
                 key={el}
               >
                 {el}
