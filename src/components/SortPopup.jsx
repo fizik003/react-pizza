@@ -15,7 +15,9 @@ const SortPopup = ({ items = [], onSelectSort, sortBy }) => {
   };
 
   const handleOutsideClick = (e) => {
-    if (!e.path.includes(sortBlockRef.current)) {
+    const path = e.path || (e.composedPath && e.composedPath());
+    // || composedPath(e.target);
+    if (!path.includes(sortBlockRef.current)) {
       setVisiblePopup(false);
     }
   };
