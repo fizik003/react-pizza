@@ -11,6 +11,7 @@ const PizzaBlock = ({
   types,
   sizes,
   onClickAddPizza,
+  addedCount,
 }) => {
   const availableSizes = [26, 30, 40];
   const [activeType, setActiveType] = useState(types[0]);
@@ -90,7 +91,7 @@ const PizzaBlock = ({
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </Button>
       </div>
     </div>

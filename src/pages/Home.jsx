@@ -20,6 +20,7 @@ const Home = () => {
   // const { items, status } = state;
 
   const items = useSelector(({ pizzas }) => pizzas.items);
+  const cartItems = useSelector(({ cart }) => cart.items);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy } = useSelector(({ filters }) => filters);
 
@@ -40,6 +41,12 @@ const Home = () => {
 
   const handleAddPizzaToCart = (pizza) => {
     dispatch(addPizzaToCart(pizza));
+  };
+
+  const getCountPizzaById = (id) => {
+    if (cartItems[id]) {
+      return;
+    }
   };
 
   return (
@@ -67,6 +74,7 @@ const Home = () => {
               <PizzaBlock
                 onClickAddPizza={handleAddPizzaToCart}
                 key={item.id}
+                addedCount={cartItems[item.id] ? cartItems[item.id].length : 0}
                 {...item}
               />
             ))
