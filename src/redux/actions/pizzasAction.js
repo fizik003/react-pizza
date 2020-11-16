@@ -12,7 +12,7 @@ const fetchPizzas = (sortBy, category) => (dispatch) => {
   const order = sortBy === "name" ? "asc" : "desc";
   axios
     .get(
-      `http://localhost:4000/pizzas?${
+      `/pizzas?${
         category !== null ? `category=${category}` : ""
       }&_sort=${sortBy}&_order=${order}`
     )
