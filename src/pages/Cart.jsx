@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 
 import { CartItem, CartEmpty } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, removeCartItem } from "../redux/actions/cartAction";
+import {
+  clearCart,
+  removeCartItem,
+  minusCartItem,
+  plusCartItem,
+} from "../redux/actions/cartAction";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -24,6 +30,14 @@ const Cart = () => {
   const onRemoveCartItem = (id) => {
     console.log(id);
     dispatch(removeCartItem(id));
+  };
+
+  const onPlusCartItemOne = (id) => {
+    dispatch(plusCartItem(id));
+  };
+
+  const onMinusCartItemOne = (id) => {
+    dispatch(minusCartItem(id));
   };
 
   return (
@@ -119,6 +133,8 @@ const Cart = () => {
                   totalPrice={priceByType[obj.id]}
                   countPizzasOneType={countPizzasOneType}
                   onRemoveCartItem={onRemoveCartItem}
+                  onMinus={onMinusCartItemOne}
+                  onPlus={onPlusCartItemOne}
                 />
               );
             })}
@@ -135,8 +151,8 @@ const Cart = () => {
               </span>
             </div>
             <div className="cart__bottom-buttons">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="button button--outline button--add go-back-btn"
               >
                 <svg
@@ -156,7 +172,7 @@ const Cart = () => {
                 </svg>
 
                 <span>Вернуться назад</span>
-              </a>
+              </Link>
               <div className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </div>

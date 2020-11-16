@@ -14,4 +14,21 @@ const removeCartItem = (id) => ({
   payload: id,
 });
 
-export { addPizzaToCart, clearCart, removeCartItem };
+const plusCartItem = (id) => ({
+  type: "PLUS_CART_ITEM",
+
+  payload: id,
+});
+
+const minusCartItem = (id) => ({
+  type: "MINUS_CART_ITEM",
+  payload: id,
+});
+
+export {
+  addPizzaToCart,
+  clearCart,
+  removeCartItem,
+  plusCartItem,
+  minusCartItem,
+};

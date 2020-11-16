@@ -10,9 +10,19 @@ const CartItem = ({
   totalPrice,
   countPizzasOneType,
   onRemoveCartItem,
+  onMinus,
+  onPlus,
 }) => {
   const handlerRemoveClock = () => {
     onRemoveCartItem(id);
+  };
+
+  const handlerPlusItem = () => {
+    onPlus(id);
+  };
+
+  const handlerMinusItem = () => {
+    onMinus(id);
   };
 
   return (
@@ -31,7 +41,11 @@ const CartItem = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <Button
+          className="button button--circle cart__item-count-minus"
+          outline
+          onClick={handlerMinusItem}
+        >
           <svg
             width="10"
             height="10"
@@ -48,9 +62,13 @@ const CartItem = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </Button>
         <b>{countPizzasOneType}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <Button
+          className="button button--circle cart__item-count-plus"
+          onClick={handlerPlusItem}
+          outline
+        >
           <svg
             width="10"
             height="10"
@@ -67,7 +85,7 @@ const CartItem = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </Button>
       </div>
       <div className="cart__item-price">
         <b>{totalPrice} ₽</b>
@@ -108,6 +126,8 @@ CartItem.propTypes = {
   countPizzasOneType: PropTypes.number,
   onRemoveCartItem: PropTypes.func,
   id: PropTypes.number,
+  onMinus: PropTypes.func,
+  onPlus: PropTypes.func,
 };
 
 export default CartItem;

@@ -58,6 +58,34 @@ const cartReducer = (state = initialState, action) => {
         totalCount: state.totalCount - deleteCountPizza,
       };
 
+    case "MINUS_CART_ITEM": {
+      let currentState = { ...state };
+      if (state.items[action.payload].length > 1) {
+        const { price: deletePizzaPrice } = currentState.items[
+          action.payload
+        ].pop();
+        currentState.totalPrice -= deletePizzaPrice;
+        currentState.priceByType[action.payload] -= deletePizzaPrice;
+        currentState.totalCount -= 1;
+      }
+
+      return currentState;
+    }
+
+    case "PLUS_CART_ITEM": {
+      let curretnState = { ...state };
+      const pizza = curretnState.items[action.payload][0];
+      curretnState.items[action.payload] = [
+        ...curretnState.items[action.payload],
+        curretnState.items[action.payload][0],
+      ];
+      curretnState.priceByType[action.payload] += pizza.price;
+      curretnState.totalCount += 1;
+      curretnState.totalPrice += pizza.price;
+
+      return curretnState;
+    }
+
     default:
       return state;
   }
